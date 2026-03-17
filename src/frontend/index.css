@@ -1,0 +1,403 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Playfair Display - Display font */
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/assets/fonts/PlayfairDisplay[wght].woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* General Sans - Body font */
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans[wght].woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* Royal Golden Dark Theme */
+    --radius: 0.5rem;
+
+    /* Background: Deep near-black */
+    --background: 0.09 0.005 60;
+    /* Foreground: Warm cream */
+    --foreground: 0.95 0.025 80;
+
+    /* Card: Slightly lighter than background */
+    --card: 0.12 0.006 60;
+    --card-foreground: 0.95 0.025 80;
+
+    /* Popover */
+    --popover: 0.14 0.007 60;
+    --popover-foreground: 0.95 0.025 80;
+
+    /* Primary: Royal Gold */
+    --primary: 0.75 0.12 75;
+    --primary-foreground: 0.09 0.005 60;
+
+    /* Secondary: Darker gold */
+    --secondary: 0.18 0.01 65;
+    --secondary-foreground: 0.9 0.03 78;
+
+    /* Muted */
+    --muted: 0.16 0.008 60;
+    --muted-foreground: 0.65 0.03 75;
+
+    /* Accent: Bright gold */
+    --accent: 0.82 0.14 78;
+    --accent-foreground: 0.09 0.005 60;
+
+    /* Destructive */
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    /* Border: subtle gold tint */
+    --border: 0.3 0.03 70;
+    --input: 0.2 0.015 65;
+    --ring: 0.75 0.12 75;
+
+    /* Charts */
+    --chart-1: 0.75 0.12 75;
+    --chart-2: 0.65 0.1 70;
+    --chart-3: 0.55 0.08 65;
+    --chart-4: 0.82 0.14 78;
+    --chart-5: 0.45 0.06 60;
+
+    /* Sidebar */
+    --sidebar: 0.1 0.006 60;
+    --sidebar-foreground: 0.95 0.025 80;
+    --sidebar-primary: 0.75 0.12 75;
+    --sidebar-primary-foreground: 0.09 0.005 60;
+    --sidebar-accent: 0.16 0.008 60;
+    --sidebar-accent-foreground: 0.95 0.025 80;
+    --sidebar-border: 0.3 0.03 70;
+    --sidebar-ring: 0.75 0.12 75;
+
+    /* Custom beauty brand tokens */
+    --gold: 0.75 0.12 75;
+    --gold-light: 0.88 0.13 82;
+    --gold-dark: 0.62 0.1 70;
+    --gold-muted: 0.5 0.08 70;
+    --cream: 0.97 0.02 85;
+    --deep-black: 0.07 0.004 55;
+    --surface-1: 0.11 0.006 60;
+    --surface-2: 0.15 0.008 62;
+    --surface-3: 0.2 0.012 65;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "General Sans", sans-serif;
+    background-color: oklch(0.09 0.005 60);
+  }
+}
+
+@layer utilities {
+  /* Gold gradient text */
+  .text-gold-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.62 0.1 70) 0%,
+      oklch(0.88 0.13 82) 50%,
+      oklch(0.62 0.1 70) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Gold shimmer animation */
+  .text-gold-shimmer {
+    background: linear-gradient(
+      90deg,
+      oklch(0.62 0.1 70) 0%,
+      oklch(0.88 0.13 82) 30%,
+      oklch(0.97 0.14 86) 50%,
+      oklch(0.88 0.13 82) 70%,
+      oklch(0.62 0.1 70) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+  }
+
+  @keyframes shimmer {
+    to {
+      background-position: 200% center;
+    }
+  }
+
+  /* Ornamental divider — single elegant rule */
+  .ornament-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: oklch(0.75 0.12 75);
+  }
+
+  .ornament-divider::before,
+  .ornament-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      oklch(0.75 0.12 75 / 0.6),
+      transparent
+    );
+  }
+
+  /* Section heading eyebrow rule */
+  .section-eyebrow-rule {
+    display: block;
+    width: 48px;
+    height: 2px;
+    margin: 0 auto 1rem;
+    background: linear-gradient(
+      90deg,
+      oklch(0.62 0.1 70),
+      oklch(0.88 0.13 82),
+      oklch(0.62 0.1 70)
+    );
+    border-radius: 2px;
+  }
+
+  /* Gold border hover — richer service cards */
+  .card-gold-hover {
+    transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.3s ease;
+    border: 1px solid oklch(0.22 0.018 65);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Sweep light across top of card */
+  .card-gold-hover::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      160deg,
+      oklch(0.75 0.12 75 / 0.04) 0%,
+      transparent 45%
+    );
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    opacity: 0;
+  }
+
+  .card-gold-hover:hover::before {
+    opacity: 1;
+  }
+
+  .card-gold-hover:hover {
+    border-color: oklch(0.75 0.12 75 / 0.7);
+    box-shadow: 0 0 0 1px oklch(0.75 0.12 75 / 0.1),
+      0 0 24px oklch(0.75 0.12 75 / 0.12),
+      0 12px 40px oklch(0 0 0 / 0.5);
+    transform: translateY(-3px);
+  }
+
+  /* Featured card — bridal / first service */
+  .card-featured {
+    border-color: oklch(0.55 0.08 70);
+    background: linear-gradient(
+      145deg,
+      oklch(0.14 0.008 62) 0%,
+      oklch(0.12 0.006 60) 100%
+    ) !important;
+  }
+
+  .card-featured::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      oklch(0.75 0.12 75),
+      transparent
+    );
+  }
+
+  /* Section fade-in */
+  .fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-in-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Gold button */
+  .btn-gold {
+    background: linear-gradient(
+      135deg,
+      oklch(0.62 0.1 70),
+      oklch(0.82 0.14 78),
+      oklch(0.62 0.1 70)
+    );
+    background-size: 200% auto;
+    color: oklch(0.09 0.005 60);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    transition: background-position 0.4s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    border: none;
+  }
+
+  .btn-gold:hover {
+    background-position: right center;
+    box-shadow: 0 0 20px oklch(0.75 0.12 75 / 0.4);
+    transform: translateY(-1px);
+  }
+
+  /* Gold outline button */
+  .btn-gold-outline {
+    background: transparent;
+    color: oklch(0.88 0.13 82);
+    border: 1px solid oklch(0.75 0.12 75);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn-gold-outline:hover {
+    background: oklch(0.75 0.12 75 / 0.1);
+    box-shadow: 0 0 16px oklch(0.75 0.12 75 / 0.3);
+    transform: translateY(-1px);
+  }
+
+  /* Jewellery-box booking form card */
+  .card-jewellery {
+    position: relative;
+    background: linear-gradient(
+      145deg,
+      oklch(0.135 0.008 63) 0%,
+      oklch(0.115 0.006 60) 60%,
+      oklch(0.13 0.007 62) 100%
+    );
+    border: 1px solid oklch(0.32 0.035 72);
+    /* Warm inner glow + deep outer shadow */
+    box-shadow:
+      inset 0 1px 0 oklch(0.75 0.12 75 / 0.12),
+      inset 0 -1px 0 oklch(0 0 0 / 0.3),
+      0 0 0 1px oklch(0 0 0 / 0.4),
+      0 4px 16px oklch(0 0 0 / 0.4),
+      0 20px 60px oklch(0 0 0 / 0.5),
+      0 0 80px oklch(0.75 0.12 75 / 0.06);
+  }
+
+  /* Decorative corner flourish on the booking card */
+  .card-jewellery::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image:
+      radial-gradient(circle at 0% 0%, oklch(0.75 0.12 75 / 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 100% 100%, oklch(0.75 0.12 75 / 0.03) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Diamond trellis micro-pattern */
+  .card-jewellery::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      oklch(0.62 0.1 70) 20%,
+      oklch(0.88 0.13 82) 50%,
+      oklch(0.62 0.1 70) 80%,
+      transparent 100%
+    );
+    border-radius: 999px 999px 0 0;
+  }
+
+  /* Noise texture overlay */
+  .noise-overlay {
+    position: relative;
+  }
+  .noise-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Service card icon well */
+  .icon-well {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, oklch(0.18 0.015 65), oklch(0.14 0.01 62));
+    border: 1px solid oklch(0.45 0.07 70 / 0.5);
+    box-shadow: 0 0 0 4px oklch(0.75 0.12 75 / 0.06),
+      inset 0 1px 0 oklch(0.75 0.12 75 / 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .card-gold-hover:hover .icon-well {
+    border-color: oklch(0.65 0.1 72 / 0.7);
+    box-shadow: 0 0 0 5px oklch(0.75 0.12 75 / 0.1),
+      0 0 12px oklch(0.75 0.12 75 / 0.15),
+      inset 0 1px 0 oklch(0.75 0.12 75 / 0.15);
+  }
+
+  /* Hero vignette frame */
+  .hero-vignette {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 50%, transparent 20%, oklch(0.07 0.004 55 / 0.55) 100%),
+      linear-gradient(to bottom, oklch(0.07 0.004 55 / 0.75) 0%, oklch(0.07 0.004 55 / 0.3) 35%, oklch(0.07 0.004 55 / 0.3) 60%, oklch(0.07 0.004 55 / 0.92) 100%);
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: oklch(0.09 0.005 60);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.45 0.07 70);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.75 0.12 75);
+  }
+}
